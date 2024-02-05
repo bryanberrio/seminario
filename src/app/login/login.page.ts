@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +12,19 @@ import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class LoginPage implements OnInit {
 
  loginForm: FormGroup;
+ 
+ validation_messages= {
+  email:[
+    { type :"required" ,message:"el email es obligatorio."},
+    { type :"pattern" ,message:"el email ingresado no es valido."}
+  ]
+}
+loginMessage:any;
 
-  constructor(private formBuilder:FormBuilder) {
+  constructor (private formBuilder:FormBuilder,
+     private authService: AuthService, 
+     private router:Router, 
+     private storage:Storage) {
 
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -19,9 +33,8 @@ export class LoginPage implements OnInit {
         Validators.required,
         Validators.pattern(
           "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$ "
-        ),
-        Validators.maxLength(50),
-        Validators.minLength(6),
+        )
+      
       ])
       )
     })
@@ -30,8 +43,17 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  login(login_data:any){
+  login (login_data:any){
     console.log(login_data);
+    this.authService.loginUser(login_data).then(res => { 
+      this.loginMessage=res;
+      this.storage.set ('userLoggedIn', true);
+      this.router.navigateByUrl ('/home');
+      
+    }).catch (err => {
+      this.loginMessage=err;
+
+    });
   }
 
 }

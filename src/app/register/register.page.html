@@ -1,0 +1,36 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="goToLogin">Volver </ion-button>
+
+     
+    </ion-buttons>
+    <ion-title>register</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar class="center-avatar"> 
+    <img src= "../../assets/image/avatar.png">
+  </ion-avatar>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+    <ion-item>
+      <ion-input label="Email" labelPlacement="floating" placeholder="email"FormControlname="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Nombre" labelPlacement="floating" placeholder="Nombre"FormControlname="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Apellido" labelPlacement="floating" placeholder="Apellido"FormControlname="last_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="contraseña" labelPlacement="floating" placeholder="contraseña"FormControlname="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="confirme contraseña" labelPlacement="floating" placeholder="confirme contraseña"FormControlname="password_confirm"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="full" color="sucess" [disabled]="!registerForm.valid">registrarse</ion-button>
+  </form>
+</ion-content>
