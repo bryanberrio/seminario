@@ -31,19 +31,35 @@ export class RegisterPage implements OnInit {
           ),
           password: new FormControl(
             "",
-            Validators.compose([])
+            Validators.compose([
+              Validators.required,
+              Validators.minLength(6),
+              Validators.maxLength(14)
+
+            ])
           ),
           password_confirm: new FormControl(
             "",
-            Validators.compose([]) 
+            Validators.compose([
+              Validators.required,
+              Validators.minLength(6),
+              Validators.maxLength(14)
+            ]) 
           ),
           name: new FormControl(
             "",
-            Validators.compose([]) 
+            Validators.compose([
+              Validators.pattern(/^[a-zA-Z\s]*$/),
+              Validators.required 
+            
+            ]) 
           ),
           last_name: new FormControl(
             "",
-            Validators.compose([])
+            Validators.compose([
+              Validators.pattern(/^[a-zA-Z\s]*$/),
+              Validators.required 
+            ])
           )
 
         })

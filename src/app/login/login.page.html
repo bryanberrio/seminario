@@ -11,7 +11,10 @@
 
   <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
     <ion-item>
-      <ion-input label="Email" labelPlacement="floating" placeholder="email"FormControlname="email"></ion-input>
+      <ion-input label="Email" labelPlacement="floating" placeholder="email"formControlname="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="contraseña" labelPlacement="floating" placeholder="contraseña"formControlname="password" type="password"></ion-input>
     </ion-item>
     <div class = "validation-message"> 
       <ng-container *ngFor="let validation of validation_messages.email">

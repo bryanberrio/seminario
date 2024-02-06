@@ -32,10 +32,17 @@ loginMessage:any;
       Validators.compose([
         Validators.required,
         Validators.pattern(
-          "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$ "
-        )
-      
+          "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
       ])
+      ),
+      password: new FormControl(
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(14)
+
+        ])
       )
     })
    }
@@ -48,7 +55,7 @@ loginMessage:any;
     this.authService.loginUser(login_data).then(res => { 
       this.loginMessage=res;
       this.storage.set ('userLoggedIn', true);
-      this.router.navigateByUrl ('/home');
+      this.router.navigateByUrl ('/intro');
       
     }).catch (err => {
       this.loginMessage=err;
